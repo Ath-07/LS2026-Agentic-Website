@@ -1,0 +1,178 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #e0c3fc 0%,
+        #f9d4ec 50%,
+        #c2e9fb 100%
+    );
+
+    overflow: hidden;
+}
+
+/* Center container */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass card */
+.login-form {
+    width: 380px;
+
+    padding: 50px 40px;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 32px rgba(31, 38, 135, 0.2);
+
+    color: white;
+}
+
+/* Heading */
+.login-form h1 {
+    font-family: 'Playfair Display', serif;
+
+    font-size: 3.2rem;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+    text-align: center;
+
+    color: rgba(20, 19, 20, 0.95);
+
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.login-form p {
+    text-align: center;
+
+    font-size: 1.1rem;
+    font-weight: 400;
+
+    color: rgba(30, 29, 28, 0.75);
+
+    margin-bottom: 50px;
+}
+
+/* Inputs */
+.input-box {
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+
+    padding: 12px 0;
+
+    background: transparent;
+
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.65);
+
+    outline: none;
+
+    font-size: 1rem;
+    font-weight: 400;
+
+    color: rgba(26, 20, 20, 0.7);
+
+    transition: 0.3s ease;
+}
+
+.input-box input::placeholder {
+    color: rgba(26, 20, 20, 0.7);
+    font-weight: 400;
+}
+
+.input-box input:focus {
+    border-bottom: 2px solid rgb(250, 248, 248);
+}
+
+/* Forgot password */
+.forgot {
+    display: block;
+
+    text-align: right;
+
+    text-decoration: none;
+
+    color: rgba(77, 43, 212, 0.85);
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    margin-bottom: 35px;
+
+    transition: 0.3s ease;
+}
+
+.forgot:hover {
+    color: rgb(234, 17, 17);
+    text-decoration: underline;
+}
+
+/* Login button */
+button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    color: white;
+
+    background: linear-gradient(
+        90deg,
+        #6a11cb,
+        #2575fc
+    );
+
+    box-shadow:
+        0 10px 25px rgba(37,117,252,0.35);
+
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(37,117,252,0.5);
+}
+
+button:active {
+    transform: scale(0.98);
+}
