@@ -1,0 +1,15 @@
+# Agentic AI Enabled Website | Learner's Space 2026
+
+This repository contains my submissions and projects for the **Agentic AI Enabled Website** track under **Learner's Space 2026**.
+
+## Completed Work
+
+### Week 1
+
+* Built a responsive login page using **HTML** and **CSS**
+* Implemented a modern **Glassmorphism** UI design
+* Used gradient backgrounds, custom typography, and hover effects
+
+---
+
+**Author:** Atharva Shetwe
