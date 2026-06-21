@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Task Manager</h1>
+
+        <div class="input-section">
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter a task">
+
+            <select id="taskType">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="other">Other</option>
+            </select>
+
+            <button id="addBtn">Add</button>
+        </div>
+
+        <p id="notification"></p>
+
+        <div class="board">
+            <div class="column">
+                <h2>Tasks</h2>
+                <div id="taskList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
