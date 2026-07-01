@@ -16,6 +16,12 @@ This repository contains my submissions and projects for the **Agentic AI Enable
 * Implemented task creation, editing, completion, and deletion with input validation
 * Designed a colorful **Kanban-inspired UI** with pastel task cards, category-based styling, and icon-based actions
 
+### Week 3
+
+* Built a **Smart Task Planner** using **HTML, CSS, and JavaScript**
+* Integrated **Gemini API** to dynamically generate structured task plans from user goals
+* Implemented loading states, error handling, and a clean responsive UI with Font Awesome icons
+
 
 ---
 
