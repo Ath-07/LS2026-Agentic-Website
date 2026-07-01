@@ -1,0 +1,11 @@
+{
+  "name": "smart-task-planner",
+  "version": "1.0.0",
+  "description": "Smart Task Planner using Gemini API",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["task-planner", "gemini", "ai"],
+  "license": "MIT"
+}

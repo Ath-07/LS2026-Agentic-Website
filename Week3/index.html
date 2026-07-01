@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Task Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Smart Task Planner</h1>
+
+    <div class="input-section">
+      <input type="text" id="goalInput" placeholder="Enter your goal (e.g., Plan a trip to Japan)">
+      <button id="planBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Plan</button>
+    </div>
+
+    <p id="message"></p>
+
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <span>Planning your tasks...</span>
+    </div>
+
+    <div id="result" class="hidden">
+      <h2>Goal: <span id="goalDisplay"></span></h2>
+      <div id="taskList"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
