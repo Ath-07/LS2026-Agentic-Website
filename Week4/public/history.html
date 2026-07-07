@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link active">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Transaction History</h1>
+
+      <table id="transactions-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="transactions-body">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+
+      <p id="empty-state" hidden>No transactions yet. Add one from the "Add Transaction" page.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    function formatCurrency(value) {
+      const number = Number(value) || 0;
+      return number.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+
+    function renderTransactions() {
+      const transactions = getTransactions();
+      const tbody = document.getElementById('transactions-body');
+      const emptyState = document.getElementById('empty-state');
+      const table = document.getElementById('transactions-table');
+
+      tbody.innerHTML = '';
+
+      if (!transactions || transactions.length === 0) {
+        table.hidden = true;
+        emptyState.hidden = false;
+        return;
+      }
+
+      table.hidden = false;
+      emptyState.hidden = true;
+
+      transactions.forEach((transaction) => {
+        const row = document.createElement('tr');
+        row.classList.add(transaction.type === 'income' ? 'row-income' : 'row-expense');
+
+        row.innerHTML = `
+          <td>${transaction.date}</td>
+          <td>${transaction.description}</td>
+          <td>${transaction.category}</td>
+          <td>${transaction.type}</td>
+          <td>${formatCurrency(transaction.amount)}</td>
+          <td>
+            <button class="delete-btn" data-id="${transaction.id}">Delete</button>
+          </td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('transactions-body').addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-btn')) {
+        const id = event.target.getAttribute('data-id');
+        deleteTransaction(id);
+        location.reload();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', renderTransactions);
+  </script>
+
+</body>
+</html>

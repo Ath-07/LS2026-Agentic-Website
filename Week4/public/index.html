@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker — Know where every rupee goes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">A ledger for the way you actually spend</p>
+          <h1>Every entry tells you<br>something. <span class="accent">We read it.</span></h1>
+          <p class="hero-sub">
+            Log what comes in and what goes out, then let a running tape and
+            an AI assistant turn those entries into a clear picture of your money —
+            no spreadsheets, no guesswork, nothing leaves your browser.
+          </p>
+          <div class="hero-actions">
+            <a href="dashboard.html" class="btn btn-primary">Open your dashboard &rarr;</a>
+            <a href="add-transaction.html" class="btn btn-secondary">Log a transaction</a>
+          </div>
+        </div>
+
+        <div class="hero-tape" aria-hidden="true">
+          <div class="tape-scroll">
+            <div class="tape-row"><span>Salary</span><span class="amount-positive">+ ₹52,000.00</span></div>
+            <div class="tape-row"><span>Groceries</span><span class="amount-negative">− ₹1,240.50</span></div>
+            <div class="tape-row"><span>Electricity Bill</span><span class="amount-negative">− ₹1,890.00</span></div>
+            <div class="tape-row"><span>Freelance Invoice</span><span class="amount-positive">+ ₹9,500.00</span></div>
+            <div class="tape-row"><span>Coffee</span><span class="amount-negative">− ₹180.00</span></div>
+            <div class="tape-row"><span>Rent</span><span class="amount-negative">− ₹14,000.00</span></div>
+            <div class="tape-row"><span>Dividend</span><span class="amount-positive">+ ₹1,120.00</span></div>
+            <div class="tape-row"><span>Metro Card Top-up</span><span class="amount-negative">− ₹500.00</span></div>
+            <!-- duplicate set for seamless loop -->
+            <div class="tape-row"><span>Salary</span><span class="amount-positive">+ ₹52,000.00</span></div>
+            <div class="tape-row"><span>Groceries</span><span class="amount-negative">− ₹1,240.50</span></div>
+            <div class="tape-row"><span>Electricity Bill</span><span class="amount-negative">− ₹1,890.00</span></div>
+            <div class="tape-row"><span>Freelance Invoice</span><span class="amount-positive">+ ₹9,500.00</span></div>
+            <div class="tape-row"><span>Coffee</span><span class="amount-negative">− ₹180.00</span></div>
+            <div class="tape-row"><span>Rent</span><span class="amount-negative">− ₹14,000.00</span></div>
+            <div class="tape-row"><span>Dividend</span><span class="amount-positive">+ ₹1,120.00</span></div>
+            <div class="tape-row"><span>Metro Card Top-up</span><span class="amount-negative">− ₹500.00</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="features">
+      <div class="container">
+        <h2 class="features-heading">Two habits. One ledger.</h2>
+        <div class="feature-grid">
+          <article class="card feature-card">
+            <p class="feature-label">01 — Track</p>
+            <h3>Every transaction, entered in seconds</h3>
+            <p>
+              Add income and expenses as they happen, tag them by category, and
+              watch your dashboard and history update instantly. It's all saved
+              locally in your browser, so your ledger is private by default.
+            </p>
+            <a href="add-transaction.html" class="feature-link">Add a transaction &rarr;</a>
+          </article>
+
+          <article class="card feature-card">
+            <p class="feature-label">02 — Understand</p>
+            <h3>AI insights that read the ledger for you</h3>
+            <p>
+              Ask the assistant where your money went this month, spot unusual
+              spending, or get a plain-language summary of your reports —
+              powered by Gemini, grounded in your own data.
+            </p>
+            <a href="assistant.html" class="feature-link">Ask the assistant &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <h2>Open the ledger. See where you stand.</h2>
+        <p>Your dashboard is already waiting — balances, recent activity, and insights in one view.</p>
+        <a href="dashboard.html" class="btn btn-primary">Go to Dashboard &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script>
+    // No persistence or AI calls needed on the landing page — this file is
+    // static by design. Interaction begins on dashboard.html.
+  </script>
+</body>
+</html>

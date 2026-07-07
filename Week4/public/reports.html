@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link active">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Reports</h1>
+
+      <section class="chart-section">
+        <canvas id="myChart"></canvas>
+        <p id="chart-empty-state" hidden>No transaction data yet to build a report.</p>
+      </section>
+
+      <section class="ai-insights-section">
+        <button id="ai-insights-btn">Get AI Insights</button>
+        <div id="ai-insights-output" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/ai.js"></script>
+  <script>
+    let categoryTotals = {};
+    let myChart = null;
+
+    function renderChart() {
+      categoryTotals = getCategoryTotals();
+      const canvas = document.getElementById('myChart');
+      const emptyState = document.getElementById('chart-empty-state');
+
+      const labels = Object.keys(categoryTotals);
+      const values = Object.values(categoryTotals);
+
+      if (labels.length === 0) {
+        canvas.hidden = true;
+        emptyState.hidden = false;
+        return;
+      }
+
+      canvas.hidden = false;
+      emptyState.hidden = true;
+
+      myChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Spending by Category',
+            data: values
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
+
+    async function getAIInsights() {
+      const button = document.getElementById('ai-insights-btn');
+      const output = document.getElementById('ai-insights-output');
+
+      button.disabled = true;
+      button.textContent = 'Thinking...';
+      output.textContent = '';
+
+      try {
+        const prompt = `Here are my spending totals by category: ${JSON.stringify(categoryTotals)}. Give me a short summary of my spending habits and one practical tip to improve them.`;
+        const response = await askAI(prompt);
+        output.textContent = response;
+      } catch (error) {
+        output.textContent = 'Sorry, something went wrong while getting AI insights. Please try again.';
+        console.error('askAI error:', error);
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Get AI Insights';
+      }
+    }
+
+    document.getElementById('ai-insights-btn').addEventListener('click', getAIInsights);
+    document.addEventListener('DOMContentLoaded', renderChart);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistant | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link active">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>AI Assistant</h1>
+
+      <section class="chat-container" id="chat-container" aria-live="polite">
+        <p class="chat-placeholder" id="chat-placeholder">Ask me anything about your finances.</p>
+      </section>
+
+      <form id="chat-form" class="chat-input-row">
+        <label for="chat-input" class="visually-hidden">Message</label>
+        <input
+          type="text"
+          id="chat-input"
+          name="chat-input"
+          placeholder="e.g. How much did I spend on food this month?"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" id="send-btn">Send</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/ai.js"></script>
+  <script>
+    const chatContainer = document.getElementById('chat-container');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatPlaceholder = document.getElementById('chat-placeholder');
+
+    function appendMessage(role, text) {
+      if (chatPlaceholder) {
+        chatPlaceholder.remove();
+      }
+
+      const messageEl = document.createElement('div');
+      messageEl.classList.add('chat-message', role === 'user' ? 'chat-message-user' : 'chat-message-ai');
+
+      const senderEl = document.createElement('span');
+      senderEl.classList.add('chat-sender');
+      senderEl.textContent = role === 'user' ? 'You' : 'Assistant';
+
+      const textEl = document.createElement('p');
+      textEl.textContent = text;
+
+      messageEl.appendChild(senderEl);
+      messageEl.appendChild(textEl);
+      chatContainer.appendChild(messageEl);
+
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+      return messageEl;
+    }
+
+    chatForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      appendMessage('user', message);
+      chatInput.value = '';
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+
+      const thinkingEl = appendMessage('ai', 'Thinking...');
+
+      try {
+        const response = await askAI(message);
+        thinkingEl.querySelector('p').textContent = response;
+      } catch (error) {
+        thinkingEl.querySelector('p').textContent = 'Sorry, something went wrong. Please try again.';
+        console.error('askAI error:', error);
+      } finally {
+        chatInput.disabled = false;
+        sendBtn.disabled = false;
+        chatInput.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Transaction | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link active">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Add Transaction</h1>
+
+      <form id="transaction-form">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" name="description" required placeholder="e.g. Grocery shopping">
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" name="amount" min="0" step="0.01" required placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" name="type" required>
+            <option value="" disabled selected>Select type</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" id="category" name="category" required placeholder="e.g. Food, Rent, Salary">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Transaction</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    const transactionForm = document.getElementById('transaction-form');
+
+    // Default the date field to today for convenience
+    document.getElementById('date').valueAsDate = new Date();
+
+    transactionForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const transaction = {
+        description: document.getElementById('description').value.trim(),
+        amount: parseFloat(document.getElementById('amount').value),
+        type: document.getElementById('type').value,
+        category: document.getElementById('category').value.trim(),
+        date: document.getElementById('date').value
+      };
+
+      addTransaction(transaction);
+
+      alert('Transaction added successfully!');
+      transactionForm.reset();
+      document.getElementById('date').valueAsDate = new Date();
+    });
+  </script>
+
+</body>
+</html>

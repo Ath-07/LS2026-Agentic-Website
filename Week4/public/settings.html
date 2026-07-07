@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link active">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Settings</h1>
+
+      <form id="settings-form">
+        <div class="form-group">
+          <label for="budget-goal">Budget Goal</label>
+          <input type="number" id="budget-goal" name="budgetGoal" min="0" step="0.01" placeholder="e.g. 2000">
+        </div>
+
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select id="currency" name="currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="INR">INR (₹)</option>
+            <option value="JPY">JPY (¥)</option>
+          </select>
+        </div>
+
+        <p id="save-status" aria-live="polite"></p>
+      </form>
+
+      <section class="danger-zone">
+        <h2>Danger Zone</h2>
+        <p>This will permanently delete all your transactions. This cannot be undone.</p>
+        <button type="button" id="reset-data-btn">Reset Data</button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    const budgetGoalInput = document.getElementById('budget-goal');
+    const currencyInput = document.getElementById('currency');
+    const saveStatus = document.getElementById('save-status');
+    const resetDataBtn = document.getElementById('reset-data-btn');
+
+    let statusTimeout = null;
+
+    function showSaveStatus(text) {
+      saveStatus.textContent = text;
+      clearTimeout(statusTimeout);
+      statusTimeout = setTimeout(() => {
+        saveStatus.textContent = '';
+      }, 2000);
+    }
+
+    function populateSettings() {
+      const settings = getSettings() || {};
+      budgetGoalInput.value = settings.budgetGoal ?? '';
+      currencyInput.value = settings.currency ?? 'USD';
+    }
+
+    function persistSettings() {
+      const settings = {
+        budgetGoal: parseFloat(budgetGoalInput.value) || 0,
+        currency: currencyInput.value
+      };
+      saveSettings(settings);
+      showSaveStatus('Settings saved.');
+    }
+
+    budgetGoalInput.addEventListener('change', persistSettings);
+    currencyInput.addEventListener('change', persistSettings);
+
+    resetDataBtn.addEventListener('click', () => {
+      const confirmed = confirm('Are you sure you want to delete all transactions? This cannot be undone.');
+      if (!confirmed) return;
+
+      clearTransactions();
+      alert('All transaction data has been reset.');
+      location.reload();
+    });
+
+    document.addEventListener('DOMContentLoaded', populateSettings);
+  </script>
+
+</body>
+</html>

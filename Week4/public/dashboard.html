@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand"><span class="brand-mark">&#183;</span> Ledger<span class="brand-mark">.</span></a>
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+      <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+      <li><a href="history.html" class="nav-link">History</a></li>
+      <li><a href="reports.html" class="nav-link">Reports</a></li>
+      <li><a href="assistant.html" class="nav-link">Assistant</a></li>
+      <li><a href="settings.html" class="nav-link">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Dashboard</h1>
+
+      <section class="summary-cards">
+        <div class="card" id="balance-card">
+          <h2>Balance</h2>
+          <p class="card-value" id="balance-value">$0.00</p>
+        </div>
+
+        <div class="card" id="income-card">
+          <h2>Total Income</h2>
+          <p class="card-value" id="income-value">$0.00</p>
+        </div>
+
+        <div class="card" id="expenses-card">
+          <h2>Total Expenses</h2>
+          <p class="card-value" id="expenses-value">$0.00</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Finance Tracker &middot; your data stays on this device.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    function formatCurrency(value) {
+      const number = Number(value) || 0;
+      return number.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+
+    function updateDashboard() {
+      const balance = getBalance();
+      const totalIncome = getTotalIncome();
+      const totalExpenses = getTotalExpenses();
+
+      document.getElementById('balance-value').textContent = formatCurrency(balance);
+      document.getElementById('income-value').textContent = formatCurrency(totalIncome);
+      document.getElementById('expenses-value').textContent = formatCurrency(totalExpenses);
+
+      // Visually flag a negative balance without hardcoding colors in JS
+      const balanceCard = document.getElementById('balance-card');
+      balanceCard.classList.toggle('negative', balance < 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', updateDashboard);
+  </script>
+
+</body>
+</html>
