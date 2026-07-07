@@ -22,6 +22,12 @@ This repository contains my submissions and projects for the **Agentic AI Enable
 * Integrated **Gemini API** to dynamically generate structured task plans from user goals
 * Implemented loading states, error handling, and a clean responsive UI with Font Awesome icons
 
+### Week 4 (Capstone Project)
+
+* Built a full-stack **Finance Tracker** using **HTML, CSS, JavaScript, and Express.js**
+* Features a **Dashboard** with balance/income/expense overview, **transaction management** with search, **category-based reports** with Chart.js pie chart, and an **AI Assistant** for natural-language financial queries via Gemini API
+* Integrated **Gemini 2.5 Flash** for spending insights and conversational chat, with a backend proxy for secure API key handling
+* Implemented **localStorage**-based persistence, currency selection, budget goal tracking, and a ledger-inspired UI with parchment tones and brass accents
 
 ---
 
